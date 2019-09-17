@@ -1,0 +1,21 @@
+2018/08/28 09:43:26 - 转换 - Loading transformation from XML file [F:\ETL_TEST\111.ktr]
+2018/08/28 09:43:26 - 111 - 为了转换解除补丁开始  [111]
+2018/08/28 09:43:26 - 表输出.0 - ERROR (version 5.1.0.0, build 1 from 2014-06-19_19-02-57 by buildguy) : 错误初始化步骤[表输出]
+2018/08/28 09:43:26 - 表输出.0 - ERROR (version 5.1.0.0, build 1 from 2014-06-19_19-02-57 by buildguy) : java.lang.NullPointerException
+2018/08/28 09:43:26 - 表输出.0 - 	at org.pentaho.di.trans.steps.tableoutput.TableOutput.init(TableOutput.java:470)
+2018/08/28 09:43:26 - 表输出.0 - 	at org.pentaho.di.trans.step.StepInitThread.run(StepInitThread.java:69)
+2018/08/28 09:43:26 - 表输出.0 - 	at java.lang.Thread.run(Thread.java:745)
+2018/08/28 09:43:26 - 111 - ERROR (version 5.1.0.0, build 1 from 2014-06-19_19-02-57 by buildguy) : 步骤 [表输出.0] 初始化失败!
+2018/08/28 09:43:26 - 表输入.0 - Finished reading query, closing connection.
+2018/08/28 09:43:26 - 转换 - ERROR (version 5.1.0.0, build 1 from 2014-06-19_19-02-57 by buildguy) : Unable to prepare for execution of the transformation
+2018/08/28 09:43:26 - 转换 - ERROR (version 5.1.0.0, build 1 from 2014-06-19_19-02-57 by buildguy) : org.pentaho.di.core.exception.KettleException: 
+2018/08/28 09:43:26 - 转换 - 无法初始化至少一个步骤.  执行无法开始!
+2018/08/28 09:43:26 - 转换 - 
+2018/08/28 09:43:26 - 转换 - 
+2018/08/28 09:43:26 - 转换 - 	at org.pentaho.di.trans.Trans.prepareExecution(Trans.java:1140)
+2018/08/28 09:43:26 - 转换 - 	at org.pentaho.di.trans.Trans.execute(Trans.java:604)
+2018/08/28 09:43:26 - 转换 - 	at org.pentaho.di.job.entries.trans.JobEntryTrans.execute(JobEntryTrans.java:1057)
+2018/08/28 09:43:26 - 转换 - 	at org.pentaho.di.job.Job.execute(Job.java:714)
+2018/08/28 09:43:26 - 转换 - 	at org.pentaho.di.job.Job.execute(Job.java:856)
+2018/08/28 09:43:26 - 转换 - 	at org.pentaho.di.job.Job.execute(Job.java:530)
+2018/08/28 09:43:26 - 转换 - 	at org.pentaho.di.job.Job.run(Job.java:422)

@@ -1,0 +1,816 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<transformation>
+  <info>
+    <name>总部收入分摊汇总</name>
+    <description />
+    <extended_description />
+    <trans_version />
+    <trans_type>Normal</trans_type>
+    <directory>/</directory>
+    <parameters>
+    </parameters>
+    <log>
+      <trans-log-table>
+        <connection />
+        <schema />
+        <table />
+        <size_limit_lines />
+        <interval />
+        <timeout_days />
+        <field>
+          <id>ID_BATCH</id>
+          <enabled>Y</enabled>
+          <name>ID_BATCH</name>
+        </field>
+        <field>
+          <id>CHANNEL_ID</id>
+          <enabled>Y</enabled>
+          <name>CHANNEL_ID</name>
+        </field>
+        <field>
+          <id>TRANSNAME</id>
+          <enabled>Y</enabled>
+          <name>TRANSNAME</name>
+        </field>
+        <field>
+          <id>STATUS</id>
+          <enabled>Y</enabled>
+          <name>STATUS</name>
+        </field>
+        <field>
+          <id>LINES_READ</id>
+          <enabled>Y</enabled>
+          <name>LINES_READ</name>
+          <subject />
+        </field>
+        <field>
+          <id>LINES_WRITTEN</id>
+          <enabled>Y</enabled>
+          <name>LINES_WRITTEN</name>
+          <subject />
+        </field>
+        <field>
+          <id>LINES_UPDATED</id>
+          <enabled>Y</enabled>
+          <name>LINES_UPDATED</name>
+          <subject />
+        </field>
+        <field>
+          <id>LINES_INPUT</id>
+          <enabled>Y</enabled>
+          <name>LINES_INPUT</name>
+          <subject />
+        </field>
+        <field>
+          <id>LINES_OUTPUT</id>
+          <enabled>Y</enabled>
+          <name>LINES_OUTPUT</name>
+          <subject />
+        </field>
+        <field>
+          <id>LINES_REJECTED</id>
+          <enabled>Y</enabled>
+          <name>LINES_REJECTED</name>
+          <subject />
+        </field>
+        <field>
+          <id>ERRORS</id>
+          <enabled>Y</enabled>
+          <name>ERRORS</name>
+        </field>
+        <field>
+          <id>STARTDATE</id>
+          <enabled>Y</enabled>
+          <name>STARTDATE</name>
+        </field>
+        <field>
+          <id>ENDDATE</id>
+          <enabled>Y</enabled>
+          <name>ENDDATE</name>
+        </field>
+        <field>
+          <id>LOGDATE</id>
+          <enabled>Y</enabled>
+          <name>LOGDATE</name>
+        </field>
+        <field>
+          <id>DEPDATE</id>
+          <enabled>Y</enabled>
+          <name>DEPDATE</name>
+        </field>
+        <field>
+          <id>REPLAYDATE</id>
+          <enabled>Y</enabled>
+          <name>REPLAYDATE</name>
+        </field>
+        <field>
+          <id>LOG_FIELD</id>
+          <enabled>Y</enabled>
+          <name>LOG_FIELD</name>
+        </field>
+        <field>
+          <id>EXECUTING_SERVER</id>
+          <enabled>N</enabled>
+          <name>EXECUTING_SERVER</name>
+        </field>
+        <field>
+          <id>EXECUTING_USER</id>
+          <enabled>N</enabled>
+          <name>EXECUTING_USER</name>
+        </field>
+        <field>
+          <id>CLIENT</id>
+          <enabled>N</enabled>
+          <name>CLIENT</name>
+        </field>
+      </trans-log-table>
+      <perf-log-table>
+        <connection />
+        <schema />
+        <table />
+        <interval />
+        <timeout_days />
+        <field>
+          <id>ID_BATCH</id>
+          <enabled>Y</enabled>
+          <name>ID_BATCH</name>
+        </field>
+        <field>
+          <id>SEQ_NR</id>
+          <enabled>Y</enabled>
+          <name>SEQ_NR</name>
+        </field>
+        <field>
+          <id>LOGDATE</id>
+          <enabled>Y</enabled>
+          <name>LOGDATE</name>
+        </field>
+        <field>
+          <id>TRANSNAME</id>
+          <enabled>Y</enabled>
+          <name>TRANSNAME</name>
+        </field>
+        <field>
+          <id>STEPNAME</id>
+          <enabled>Y</enabled>
+          <name>STEPNAME</name>
+        </field>
+        <field>
+          <id>STEP_COPY</id>
+          <enabled>Y</enabled>
+          <name>STEP_COPY</name>
+        </field>
+        <field>
+          <id>LINES_READ</id>
+          <enabled>Y</enabled>
+          <name>LINES_READ</name>
+        </field>
+        <field>
+          <id>LINES_WRITTEN</id>
+          <enabled>Y</enabled>
+          <name>LINES_WRITTEN</name>
+        </field>
+        <field>
+          <id>LINES_UPDATED</id>
+          <enabled>Y</enabled>
+          <name>LINES_UPDATED</name>
+        </field>
+        <field>
+          <id>LINES_INPUT</id>
+          <enabled>Y</enabled>
+          <name>LINES_INPUT</name>
+        </field>
+        <field>
+          <id>LINES_OUTPUT</id>
+          <enabled>Y</enabled>
+          <name>LINES_OUTPUT</name>
+        </field>
+        <field>
+          <id>LINES_REJECTED</id>
+          <enabled>Y</enabled>
+          <name>LINES_REJECTED</name>
+        </field>
+        <field>
+          <id>ERRORS</id>
+          <enabled>Y</enabled>
+          <name>ERRORS</name>
+        </field>
+        <field>
+          <id>INPUT_BUFFER_ROWS</id>
+          <enabled>Y</enabled>
+          <name>INPUT_BUFFER_ROWS</name>
+        </field>
+        <field>
+          <id>OUTPUT_BUFFER_ROWS</id>
+          <enabled>Y</enabled>
+          <name>OUTPUT_BUFFER_ROWS</name>
+        </field>
+      </perf-log-table>
+      <channel-log-table>
+        <connection />
+        <schema />
+        <table />
+        <timeout_days />
+        <field>
+          <id>ID_BATCH</id>
+          <enabled>Y</enabled>
+          <name>ID_BATCH</name>
+        </field>
+        <field>
+          <id>CHANNEL_ID</id>
+          <enabled>Y</enabled>
+          <name>CHANNEL_ID</name>
+        </field>
+        <field>
+          <id>LOG_DATE</id>
+          <enabled>Y</enabled>
+          <name>LOG_DATE</name>
+        </field>
+        <field>
+          <id>LOGGING_OBJECT_TYPE</id>
+          <enabled>Y</enabled>
+          <name>LOGGING_OBJECT_TYPE</name>
+        </field>
+        <field>
+          <id>OBJECT_NAME</id>
+          <enabled>Y</enabled>
+          <name>OBJECT_NAME</name>
+        </field>
+        <field>
+          <id>OBJECT_COPY</id>
+          <enabled>Y</enabled>
+          <name>OBJECT_COPY</name>
+        </field>
+        <field>
+          <id>REPOSITORY_DIRECTORY</id>
+          <enabled>Y</enabled>
+          <name>REPOSITORY_DIRECTORY</name>
+        </field>
+        <field>
+          <id>FILENAME</id>
+          <enabled>Y</enabled>
+          <name>FILENAME</name>
+        </field>
+        <field>
+          <id>OBJECT_ID</id>
+          <enabled>Y</enabled>
+          <name>OBJECT_ID</name>
+        </field>
+        <field>
+          <id>OBJECT_REVISION</id>
+          <enabled>Y</enabled>
+          <name>OBJECT_REVISION</name>
+        </field>
+        <field>
+          <id>PARENT_CHANNEL_ID</id>
+          <enabled>Y</enabled>
+          <name>PARENT_CHANNEL_ID</name>
+        </field>
+        <field>
+          <id>ROOT_CHANNEL_ID</id>
+          <enabled>Y</enabled>
+          <name>ROOT_CHANNEL_ID</name>
+        </field>
+      </channel-log-table>
+      <step-log-table>
+        <connection />
+        <schema />
+        <table />
+        <timeout_days />
+        <field>
+          <id>ID_BATCH</id>
+          <enabled>Y</enabled>
+          <name>ID_BATCH</name>
+        </field>
+        <field>
+          <id>CHANNEL_ID</id>
+          <enabled>Y</enabled>
+          <name>CHANNEL_ID</name>
+        </field>
+        <field>
+          <id>LOG_DATE</id>
+          <enabled>Y</enabled>
+          <name>LOG_DATE</name>
+        </field>
+        <field>
+          <id>TRANSNAME</id>
+          <enabled>Y</enabled>
+          <name>TRANSNAME</name>
+        </field>
+        <field>
+          <id>STEPNAME</id>
+          <enabled>Y</enabled>
+          <name>STEPNAME</name>
+        </field>
+        <field>
+          <id>STEP_COPY</id>
+          <enabled>Y</enabled>
+          <name>STEP_COPY</name>
+        </field>
+        <field>
+          <id>LINES_READ</id>
+          <enabled>Y</enabled>
+          <name>LINES_READ</name>
+        </field>
+        <field>
+          <id>LINES_WRITTEN</id>
+          <enabled>Y</enabled>
+          <name>LINES_WRITTEN</name>
+        </field>
+        <field>
+          <id>LINES_UPDATED</id>
+          <enabled>Y</enabled>
+          <name>LINES_UPDATED</name>
+        </field>
+        <field>
+          <id>LINES_INPUT</id>
+          <enabled>Y</enabled>
+          <name>LINES_INPUT</name>
+        </field>
+        <field>
+          <id>LINES_OUTPUT</id>
+          <enabled>Y</enabled>
+          <name>LINES_OUTPUT</name>
+        </field>
+        <field>
+          <id>LINES_REJECTED</id>
+          <enabled>Y</enabled>
+          <name>LINES_REJECTED</name>
+        </field>
+        <field>
+          <id>ERRORS</id>
+          <enabled>Y</enabled>
+          <name>ERRORS</name>
+        </field>
+        <field>
+          <id>LOG_FIELD</id>
+          <enabled>N</enabled>
+          <name>LOG_FIELD</name>
+        </field>
+      </step-log-table>
+      <metrics-log-table>
+        <connection />
+        <schema />
+        <table />
+        <timeout_days />
+        <field>
+          <id>ID_BATCH</id>
+          <enabled>Y</enabled>
+          <name>ID_BATCH</name>
+        </field>
+        <field>
+          <id>CHANNEL_ID</id>
+          <enabled>Y</enabled>
+          <name>CHANNEL_ID</name>
+        </field>
+        <field>
+          <id>LOG_DATE</id>
+          <enabled>Y</enabled>
+          <name>LOG_DATE</name>
+        </field>
+        <field>
+          <id>METRICS_DATE</id>
+          <enabled>Y</enabled>
+          <name>METRICS_DATE</name>
+        </field>
+        <field>
+          <id>METRICS_CODE</id>
+          <enabled>Y</enabled>
+          <name>METRICS_CODE</name>
+        </field>
+        <field>
+          <id>METRICS_DESCRIPTION</id>
+          <enabled>Y</enabled>
+          <name>METRICS_DESCRIPTION</name>
+        </field>
+        <field>
+          <id>METRICS_SUBJECT</id>
+          <enabled>Y</enabled>
+          <name>METRICS_SUBJECT</name>
+        </field>
+        <field>
+          <id>METRICS_TYPE</id>
+          <enabled>Y</enabled>
+          <name>METRICS_TYPE</name>
+        </field>
+        <field>
+          <id>METRICS_VALUE</id>
+          <enabled>Y</enabled>
+          <name>METRICS_VALUE</name>
+        </field>
+      </metrics-log-table>
+    </log>
+    <maxdate>
+      <connection />
+      <table />
+      <field />
+      <offset>0.0</offset>
+      <maxdiff>0.0</maxdiff>
+    </maxdate>
+    <size_rowset>10000</size_rowset>
+    <sleep_time_empty>50</sleep_time_empty>
+    <sleep_time_full>50</sleep_time_full>
+    <unique_connections>N</unique_connections>
+    <feedback_shown>Y</feedback_shown>
+    <feedback_size>50000</feedback_size>
+    <using_thread_priorities>Y</using_thread_priorities>
+    <shared_objects_file />
+    <capture_step_performance>N</capture_step_performance>
+    <step_performance_capturing_delay>1000</step_performance_capturing_delay>
+    <step_performance_capturing_size_limit>100</step_performance_capturing_size_limit>
+    <dependencies>
+    </dependencies>
+    <partitionschemas>
+    </partitionschemas>
+    <slaveservers>
+    </slaveservers>
+    <clusterschemas>
+    </clusterschemas>
+    <created_user>-</created_user>
+    <created_date>2019/08/29 14:17:57.740</created_date>
+    <modified_user>-</modified_user>
+    <modified_date>2019/08/29 14:17:57.740</modified_date>
+    <key_for_session_key />
+    <is_key_private>N</is_key_private>
+  </info>
+  <notepads>
+  </notepads>
+  <connection>
+    <name>HS</name>
+    <server>10.16.1.249</server>
+    <type>MSSQLNATIVE</type>
+    <access>Native</access>
+    <database>HS</database>
+    <port>1433</port>
+    <username>sa</username>
+    <password>Encrypted 2be98afc86aa7f2b4aa0abd50c99dbdde</password>
+    <servername />
+    <data_tablespace />
+    <index_tablespace />
+    <attributes>
+      <attribute>
+        <code>EXTRA_OPTION_MSSQLNATIVE.instance</code>
+        <attribute>dbo</attribute>
+      </attribute>
+      <attribute>
+        <code>FORCE_IDENTIFIERS_TO_LOWERCASE</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>FORCE_IDENTIFIERS_TO_UPPERCASE</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>IS_CLUSTERED</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>MSSQLUseIntegratedSecurity</code>
+        <attribute>false</attribute>
+      </attribute>
+      <attribute>
+        <code>MSSQL_DOUBLE_DECIMAL_SEPARATOR</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>PORT_NUMBER</code>
+        <attribute>1433</attribute>
+      </attribute>
+      <attribute>
+        <code>PRESERVE_RESERVED_WORD_CASE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>QUOTE_ALL_FIELDS</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>SUPPORTS_BOOLEAN_DATA_TYPE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>SUPPORTS_TIMESTAMP_DATA_TYPE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>USE_POOLING</code>
+        <attribute>N</attribute>
+      </attribute>
+    </attributes>
+  </connection>
+  <order>
+    <hop>
+      <from>表输入</from>
+      <to>表输出</to>
+      <enabled>Y</enabled>
+    </hop>
+  </order>
+  <step>
+    <name>表输入</name>
+    <type>TableInput</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>HS</connection>
+    <sql>WITH JYSR AS ---各项目收入、累计收入
+(
+SELECT project_code,
+	  year+(case when len(month)=1 then '-0'+month else '-'+month end) yearmonth,
+		year,
+		month,
+	  SR_actual,
+	  LR_actual,
+		sum(lr_actual) over (partition by project_code,year order by project_code,year,cast(month as int)) as lj_actual
+FROM YW_YY_BENEFIT_ANALYST_SUM
+where year>=2019
+group by project_code,year,month,sr_actual,lr_actual
+),
+jtglf_standard AS ---集团管理费标准
+(
+SELECT project_code,
+       zsgl_fee/(10000*dfl) zsgl_fee,
+       jysr,
+       ebitda_gop,
+       xxgl_fee,
+       pptg_fee,
+       sjgl_fee,
+       gcgl_fee,
+			 [year]
+FROM YY_HS_JTGL_FEE_Standard
+where 
+ project_code not in('BJ_HSH_SDDJZHT','SH_HSH_WJCZHT','GZ_HSH_JH_ZHT')
+),
+jtglf as ---集团管理费取费基数
+(
+select
+	project_code,
+	yearmonth,
+	zsgl_fee,
+	qqgl_fee,
+	sjgl_fee,
+	gcgl_fee
+from YY_HS_JTGL_FEE
+),
+pptgf as ---品牌推广费从预算达成页面取数
+(
+select b.project_code,       
+       b.year+(case when len(b.[month])=1 then '-0'+b.[month] else '-'+b.[month]end) yearmonth,
+       b.budget pptg_fee
+from YW_YY_BENEFIT_ANALYST b
+LEFT JOIN DIM_BI_YUSUAN_SUBJECT c ON b.subject_code=c.bi_subject_code
+WHERE b.subject_code ='DSGPMF4.4'
+and b.project_code not in ('BJ_HSH_SDDJZHT','SH_HSH_WJCZHT','GZ_HSH_JH_ZHT')
+--group by b.year+(case when len(b.[month])=1 then '-0'+b.[month] else '-'+b.[month]end)
+
+)
+
+--除运营管理费外其他的管理收入计算
+,month_HZ as(
+SELECT
+     a.project_code,
+	 c.yearmonth,
+	isnull(b.zsgl_fee, 0) * isnull(c.zsgl_fee, 0) ZSGLF,
+	--sum(isnull(b.jysr, 0) * isnull(d.SR_actual, 0)) + case when sum(isnull(b.ebitda_gop, 0) * isnull(d.lj_actual, 0)) &lt;0 then 0 else sum(isnull(b.ebitda_gop, 0) * isnull(d.LR_actual, 0)) end  as YYGLF,
+	--sum(b.xxgl_fee)  as XXHGLF,
+	case when right(c.yearmonth,2) = '01' then b.xxgl_fee-round(b.xxgl_fee/12,2)*11 else  round(b.xxgl_fee/12,2) end as  XXHGLF,
+	f.pptg_fee*b.pptg_fee PPTGF,
+    c.qqgl_fee QQGLF,
+	b.sjgl_fee*c.sjgl_fee SJGLF,
+	b.gcgl_fee*c.gcgl_fee GCGLF
+FROM
+	YW_HS_PROJECT_BASEINFO a
+LEFT JOIN jtglf c ON a.project_code = c.project_code 
+LEFT JOIN jtglf_standard b ON a.project_code = b.project_code and b.year = left(c.yearmonth,4)
+LEFT JOIN JYSR d ON a.project_code = d.project_code and c.yearmonth=d.yearmonth
+left join pptgf f on a.project_code = f.project_code and c.yearmonth=f.yearmonth
+where --left(c.yearmonth,4)=left('2019-03',4) and
+--and right(c.yearmonth,2)&lt;=month('${yearmonth}'+'-01') and
+ a.project_code not in('BJ_HSH_SDDJZHT','SH_HSH_WJCZHT','GZ_HSH_JH_ZHT')
+),
+----运营管理费算累计值
+yyglf as(
+select
+a.project_code,
+d.year,
+d.month,
+sum(isnull(b.jysr, 0) * isnull(d.SR_actual, 0)) over (partition by a.project_code,d.year order by a.project_code,d.year,cast(d.month as int)) + case when sum(isnull(b.ebitda_gop, 0) * isnull(d.lj_actual, 0)) &lt;=0 then 0 else sum(isnull(b.ebitda_gop, 0) * isnull(d.LR_actual, 0)) over (partition by a.project_code,d.year order by a.project_code,d.year,cast(d.month as int)) end  as YYGLF
+from YW_HS_PROJECT_BASEINFO a
+LEFT JOIN JYSR d ON a.project_code = d.project_code
+LEFT JOIN jtglf_standard b ON a.project_code = b.project_code and b.year = d.year
+group by a.project_code,d.yearmonth,b.jysr,d.sr_actual,b.ebitda_gop,d.lj_actual,d.lr_actual,d.year,d.month
+),
+
+---运营管理费做累计倒减
+yyglf_hz as(
+select a.project_code,a.year+(case when len(a.month)=1 then '-0'+a.month else '-'+a.month end) yearmonth
+,sum(a.yyglf)-sum(isnull(b.yyglf,0)) as yyglf 
+from yyglf a 
+left join yyglf b on a.project_code = b.project_code and a.year = b.year and a.month = b.month+1 
+where a.year is not null 
+group by a.project_code,a.year,a.month)
+
+SELECT
+a.yearmonth,
+'DSSR1.1.2' as subject_code,
+'运营管理费' as subject_name
+--,a.project_code
+--,a.yyglf*c.ratio as je
+,sum(a.yyglf*c.ratio) as je
+,c.body_code
+FROM
+yyglf_hz a
+LEFT JOIN yw_hs_project_zb b on a.project_code = b.project_code
+LEFT JOIN YW_HS_ZB_CONFIG c on b.shiyebu = c.shiyebu and b.quyu = c.quyu and c.subject_code = 'DSSR1.1.2'
+where a.yyglf &lt;&gt; 0 
+and  left(a.yearmonth,4) >= '2019' --and c.body_code = 'ZB10011401'
+GROUP BY a.yearmonth,c.body_code
+
+UNION
+--确认没有问题
+SELECT
+a.yearmonth,
+'DSSR1.1.1' as subject_code,
+'招商管理费' as subject_name,
+--a.project_code,
+sum(a.zsglf*c.ratio) as je,
+c.body_code
+FROM
+month_hz a
+LEFT JOIN yw_hs_project_zb b on a.project_code = b.project_code
+LEFT JOIN YW_HS_ZB_CONFIG c on b.shiyebu = c.shiyebu and b.quyu = c.quyu and c.subject_code = 'DSSR1.1.1'
+where a.zsglf &lt;&gt; 0 
+and  left(a.yearmonth,4) >= '2019' --and c.body_code = 'ZB10011401'
+GROUP BY a.yearmonth,c.body_code
+
+UNION
+--信息化管理费确认无误
+SELECT
+a.yearmonth,
+'DSSR1.1.3' as subject_code,
+'信息化管理费' as subject_name,
+--a.project_code,
+sum(a.xxhglf*c.ratio) as je,
+c.body_code
+FROM
+month_hz a
+LEFT JOIN yw_hs_project_zb b on a.project_code = b.project_code
+LEFT JOIN YW_HS_ZB_CONFIG c on b.shiyebu = c.shiyebu and b.quyu = c.quyu and c.subject_code = 'DSSR1.1.3'
+where a.xxhglf &lt;&gt; 0 
+and  left(a.yearmonth,4) >= '2019' --and c.body_code = 'ZB10011401'
+GROUP BY a.yearmonth,c.body_code
+
+UNION
+--品牌推广费确认无误
+SELECT
+a.yearmonth,
+'DSSR1.1.4' as subject_code,
+'品牌推广费' as subject_name,
+--a.project_code,
+sum(a.PPTGF*c.ratio) as je,
+c.body_code
+FROM
+month_hz a
+LEFT JOIN yw_hs_project_zb b on a.project_code = b.project_code
+LEFT JOIN YW_HS_ZB_CONFIG c on b.shiyebu = c.shiyebu and b.quyu = c.quyu and c.subject_code = 'DSSR1.1.4'
+where a.PPTGF &lt;&gt; 0 
+and  left(a.yearmonth,4) >= '2019' --and c.body_code = 'ZB10011401'
+GROUP BY a.yearmonth,c.body_code
+
+UNION
+--前期管理费确认无误
+SELECT
+a.yearmonth,
+'DSSR1.1.5' as subject_code,
+'前期管理费' as subject_name,
+--a.project_code,
+sum(a.QQGLF*c.ratio) as je,
+c.body_code
+FROM
+month_hz a
+LEFT JOIN yw_hs_project_zb b on a.project_code = b.project_code
+LEFT JOIN YW_HS_ZB_CONFIG c on b.shiyebu = c.shiyebu and b.quyu = c.quyu and c.subject_code = 'DSSR1.1.5'
+where a.QQGLF &lt;&gt; 0 
+and  left(a.yearmonth,4) >= '2019' --and c.body_code = 'ZB10011401'
+GROUP BY a.yearmonth,c.body_code
+
+UNION
+--设计管理费确认无误
+SELECT
+a.yearmonth,
+'DSSR1.1.6' as subject_code,
+'设计管理费' as subject_name,
+--a.project_code,
+sum(a.SJGLF) as je,
+'ZB10011410' as body_code
+FROM
+month_hz a
+where a.SJGLF &lt;&gt; 0 
+and  left(a.yearmonth,4) >= '2019' --and c.body_code = 'ZB10011401'
+GROUP BY a.yearmonth
+
+UNION
+--设计管理费确认无误
+SELECT
+a.yearmonth,
+'DSSR1.1.7' as subject_code,
+'工程管理费' as subject_name,
+--a.project_code,
+sum(a.GCGLF) as je,
+'ZB10011410' as body_code
+FROM
+month_hz a
+where a.GCGLF &lt;&gt; 0 
+and  left(a.yearmonth,4) >= '2019' --and c.body_code = 'ZB10011401'
+GROUP BY a.yearmonth</sql>
+    <limit>0</limit>
+    <lookup />
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>432</xloc>
+      <yloc>224</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>表输出</name>
+    <type>TableOutput</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>HS</connection>
+    <schema>dbo</schema>
+    <table>YW_HS_ZB_INCOME</table>
+    <commit>1000</commit>
+    <truncate>Y</truncate>
+    <ignore_errors>N</ignore_errors>
+    <use_batch>Y</use_batch>
+    <specify_fields>Y</specify_fields>
+    <partitioning_enabled>N</partitioning_enabled>
+    <partitioning_field />
+    <partitioning_daily>N</partitioning_daily>
+    <partitioning_monthly>Y</partitioning_monthly>
+    <tablename_in_field>N</tablename_in_field>
+    <tablename_field />
+    <tablename_in_table>Y</tablename_in_table>
+    <return_keys>N</return_keys>
+    <return_field />
+    <fields>
+      <field>
+        <column_name>yearmonth</column_name>
+        <stream_name>yearmonth</stream_name>
+      </field>
+      <field>
+        <column_name>subject_code</column_name>
+        <stream_name>subject_code</stream_name>
+      </field>
+      <field>
+        <column_name>subject_name</column_name>
+        <stream_name>subject_name</stream_name>
+      </field>
+      <field>
+        <column_name>buhanshuijia</column_name>
+        <stream_name>je</stream_name>
+      </field>
+      <field>
+        <column_name>bodycode</column_name>
+        <stream_name>body_code</stream_name>
+      </field>
+    </fields>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>800</xloc>
+      <yloc>224</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step_error_handling>
+  </step_error_handling>
+  <slave-step-copy-partition-distribution>
+  </slave-step-copy-partition-distribution>
+  <slave_transformation>N</slave_transformation>
+</transformation>

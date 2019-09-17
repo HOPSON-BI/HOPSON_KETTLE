@@ -1,0 +1,200 @@
+with ShopUnit as (
+select  *
+from    DW_DLDF_ShopUnit 
+where convert(varchar(10),bizdate,120)=convert(varchar(10),dateadd(day,-1,getdate()),120)
+),
+ShopUnit_last as (
+select  *
+from    DW_DLDF_ShopUnit 
+where convert(varchar(10),bizdate,120)=convert(varchar(10),dateadd(day,-1,dateadd(month,-1,getdate())),120)
+),
+unit as (
+select  a.project_code,
+        a.build_no,
+        a.floor,
+        a.unitid,
+				a.unitstatus,
+        a.userarea,
+        a.bizdate
+from    DW_DLDF_Unit_Shop a
+where convert(varchar(10),bizdate,120)=convert(varchar(10),dateadd(day,-1,getdate()),120)
+and unitstatus<>2
+and left(UnitCode,2)<>'GG'
+and left(UnitCode,2)<>'CK'
+and bizdate>=unit_start_time
+and bizdate<=isnull(unit_end_time,'9999-01-01')
+--and a.project_code='BJ_HSH_SDCFGC'
+),
+unit_last as (
+select  a.project_code,
+        a.build_no,
+        a.floor,
+        a.unitid,
+				a.unitstatus,
+        a.userarea,
+        a.bizdate
+from    DW_DLDF_Unit_Shop a
+where convert(varchar(10),bizdate,120)=convert(varchar(10),dateadd(day,-1,dateadd(month,-1,getdate())),120)
+and unitstatus<>2
+and left(UnitCode,2)<>'GG'
+and left(UnitCode,2)<>'CK'
+and bizdate>=unit_start_time
+and bizdate<=isnull(unit_end_time,'9999-01-01')
+--and a.project_code='BJ_HSH_SDCFGC'
+),
+shop as (
+select 
+		a.project_code,
+        a.build_no,
+        c.floor,
+        a.bizdate,
+        a.shopid,
+        a.contractstatus_chuzu,
+        a.contractstatus_qizu,
+        a.ConStartdate,
+        a.RentStartDate,
+        case when isnull(a.stopdate,0)<>0 then a.stopdate else a.ConEndDate end as conenddate,
+        c.unitid,
+        c.UserArea     
+from    DW_DLDF_ShopBase a
+left    join ShopUnit  b 	on a.shopid=b.shopid
+left    join unit c 			on b.unitid=c.unitid
+where   convert(varchar(10),a.bizdate,120)=convert(varchar(10),dateadd(day,-1,getdate()),120)
+--and     a.project_code='BJ_HSH_SDCFGC'
+),---合同面积
+shop_last as (
+select 
+		    a.project_code,
+        a.build_no,
+        c.floor,
+        a.bizdate,
+        a.shopid,
+        a.contractstatus_chuzu,
+        a.contractstatus_qizu,
+        a.ConStartdate,
+        a.RentStartDate,
+        case when isnull(a.stopdate,0)<>0 then a.stopdate else a.ConEndDate end as conenddate,
+        c.unitid,
+        c.UserArea     
+from    DW_DLDF_ShopBase a
+left    join ShopUnit_last  b 	on a.shopid=b.shopid
+left    join unit_last c 			on b.unitid=c.unitid
+where   convert(varchar(10),a.bizdate,120)=convert(varchar(10),dateadd(day,-1,dateadd(day,-1,dateadd(month,-1,getdate()))),120)
+--and     a.project_code='BJ_HSH_SDCFGC'
+),---合同面积上月
+area_jzl as (
+select  convert(varchar(7),dateadd(month,-1,convert(varchar(10),a.bizdate,120)),120) as yearmonth,
+        a.project_code,
+        a.build_no,
+        a.floor,
+        sum(a.userarea) as area_jzl
+from   unit a
+where   a.unitstatus!=2
+group   by  a.project_code,a.build_no,a.floor,dateadd(month,-1,convert(varchar(10),a.bizdate,120))
+),---净租赁面积
+area_yuechu as (
+select  convert(varchar(7),dateadd(month,-1,convert(varchar(10),a.bizdate,120)),120) as yearmonth,
+        a.project_code,
+        a.build_no,
+        a.floor,
+        sum(a.userarea) as area_yuechu
+from    shop a
+where   convert(varchar(10),a.constartdate,120)<=convert(varchar(10),dateadd(d,-day(dateadd(month,-1,a.bizdate))+1,dateadd(month,-1,a.bizdate)),120)
+and     convert(varchar(10),a.conenddate,120)>=convert(varchar(10),dateadd(d,-day(dateadd(month,-1,a.bizdate))+1,dateadd(month,-1,a.bizdate)),120)
+group by a.project_code,a.build_no,a.floor,dateadd(month,-1,convert(varchar(10),a.bizdate,120))
+),------月初已出租面积
+area_ycz as(
+select  convert(varchar(7),dateadd(month,-1,convert(varchar(10),a.bizdate,120)),120) as yearmonth,
+        a.project_code,
+        a.build_no,
+        a.floor,
+        a.unitid,
+        sum(a.userarea) as area_ycz
+from    shop_last a
+where   convert(varchar(10),a.constartdate,120)<=convert(varchar(10),dateadd(d,-day(dateadd(month,-1,a.bizdate)),dateadd(m,1,dateadd(month,-1,a.bizdate))),120)
+and     convert(varchar(10),a.conenddate,120)>=convert(varchar(10),dateadd(d,-day(dateadd(month,-1,a.bizdate)),dateadd(m,1,dateadd(month,-1,a.bizdate))),120)
+group by a.project_code,a.build_no,a.floor,a.unitid,dateadd(month,-1,convert(varchar(10),a.bizdate,120))
+),---已出租面积
+area_yqz as(
+select  convert(varchar(7),dateadd(month,-1,convert(varchar(10),a.bizdate,120)),120) as yearmonth,
+        a.project_code,
+        a.build_no,
+        a.floor,
+        sum(a.userarea) as area_yqz
+from    shop a
+where   convert(varchar(10),a.rentstartdate,120)<=convert(varchar(10),dateadd(d,-day(dateadd(month,-1,a.bizdate)),dateadd(m,1,dateadd(month,-1,a.bizdate))),120)
+and     convert(varchar(10),a.conenddate,120)>=convert(varchar(10),dateadd(d,-day(dateadd(month,-1,a.bizdate)),dateadd(m,1,dateadd(month,-1,a.bizdate))),120)
+group by a.project_code,a.build_no,a.floor,dateadd(month,-1,convert(varchar(10),a.bizdate,120))
+),---已起租面积
+area_zhongzhi as (
+select  convert(varchar(7),dateadd(month,-1,convert(varchar(10),a.bizdate,120)),120) as yearmonth,
+        a.project_code,
+        a.build_no,
+        a.floor,
+        sum(a.userarea) as area_zhongzhi
+from   shop a
+where  convert(varchar(7),a.conenddate,120)=convert(varchar(7),dateadd(month,-1,convert(varchar(10),a.bizdate,120)),120)
+group by a.project_code,a.build_no,a.floor,dateadd(month,-1,convert(varchar(10),a.bizdate,120))
+),---本月新增空铺面积
+area_xinqian as (
+select  convert(varchar(7),dateadd(month,-1,convert(varchar(10),a.bizdate,120)),120) as yearmonth,
+        a.project_code,
+        a.build_no,
+        a.floor,
+        a.unitid,
+        sum(a.userarea) as area_xinqian
+from   shop a
+where  convert(varchar(7),a.constartdate,120)=convert(varchar(7),dateadd(month,-1,convert(varchar(10),a.bizdate,120)),120)
+group by a.project_code,a.build_no,a.floor,a.unitid,dateadd(month,-1,convert(varchar(10),a.bizdate,120))
+),---本月新签约面积
+area_kongzhi as (
+select  convert(varchar(7),dateadd(month,-1,convert(varchar(10),a.bizdate,120)),120) as yearmonth,
+        a.project_code,
+        a.build_no,
+        a.floor,
+        sum(a.userarea) as area_kongzhi
+from    shop a
+where   convert(varchar(10),a.constartdate,120)>convert(varchar(10),dateadd(d,-day(dateadd(month,-1,a.bizdate)),dateadd(m,1,dateadd(month,-1,a.bizdate))),120)
+group by a.project_code,a.build_no,a.floor,dateadd(month,-1,convert(varchar(10),a.bizdate,120))
+),----空置面积
+actual as (
+select
+convert(varchar(7),dateadd(month,-1,convert(varchar(10),getdate(),120)),120) as yearmonth,
+getdate() as timestamp,
+a.bi_project_code,
+a.bi_buildingname,
+a.bi_floorname,
+b.area_jzl,
+b.area_jzl-d.area_ycz AS area_kp,
+d.area_ycz,
+e.area_yqz,
+f.area_zhongzhi,
+g.area_xinqian,
+h.area_kongzhi,
+k.area_yuechu,
+b.area_jzl-k.area_yuechu as area_yckp,
+case when isnull(b.area_jzl,0)<>0 then d.area_ycz/b.area_jzl else null end as rate_chuzu,
+case when isnull(b.area_jzl,0)<>0 then e.area_yqz/b.area_jzl else null end as rate_qizu
+from YW_BI_DLDF_PROJECT_MAP a 
+left join area_jzl b on a.bi_project_code=b.project_code and a.bi_buildingname=b.build_no and a.bi_floorname=b.floor
+left join area_ycz d on a.bi_project_code=d.project_code and a.bi_buildingname=d.build_no and a.bi_floorname=d.floor
+left join area_yqz e on a.bi_project_code=e.project_code and a.bi_buildingname=e.build_no and a.bi_floorname=e.floor
+left join area_zhongzhi f on a.bi_project_code=f.project_code and a.bi_buildingname=f.build_no and a.bi_floorname=f.floor
+left join area_xinqian  g on a.bi_project_code=g.project_code and a.bi_buildingname=g.build_no and a.bi_floorname=g.floor
+left join area_kongzhi  h on a.bi_project_code=h.project_code and a.bi_buildingname=h.build_no and a.bi_floorname=h.floor
+left join area_yuechu   k on a.bi_project_code=k.project_code and a.bi_buildingname=k.build_no and a.bi_floorname=k.floor
+),---------实际面积统计
+KPA as(
+select * from  area_xinqian
+where unitid is not null
+--where  unitid in (select unitid from area_ycz)
+),
+KPB as(
+select * from  area_ycz
+where unitid is not null
+)
+select * from  kpA
+--WHERE KPA.UNITID IN (SELECT KPB.UNITID FROM KPB)
+
+
+
